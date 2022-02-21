@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose') ;
 const Schema = mongoose.Schema;
 
 const SearchObject = new Schema({
@@ -28,5 +28,5 @@ const SearchObject = new Schema({
       
 
 });
-
-export default mongoose.model('SearchObject', SearchObject );
+module.exports = mongoose.model('Products', SearchObject );
+ 
