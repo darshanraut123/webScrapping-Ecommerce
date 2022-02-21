@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 const Products = require("./SearchObject");
 const port = process.env.PORT || 4000;
 const mongoose = require("mongoose");
@@ -14,6 +15,7 @@ mongoose.connect(
   }
 );
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/",async (req, res) => {
