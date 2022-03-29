@@ -6,9 +6,15 @@ const startBrowser = require("./browser");
 const fetchShelves = async (userInput) => {
   try {
 
+        let headers = {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "axios 0.21.1"
+      }
+    }
 
     //For AMAZON
-    const azpage = await axios.get(`https://www.amazon.in/s?k=${userInput}`);
+    const azpage = await axios.get(`https://www.amazon.in/s?k=${userInput}`,headers);
     var $ = cheerio.load(azpage.data);
     const amazonItem = $("div.s-result-item.s-widget-spacing-small");
     const amazonTitle = amazonItem.find(".a-size-medium").first().text();
@@ -36,7 +42,7 @@ const fetchShelves = async (userInput) => {
 
 
     //FOR FLIPKART
-    const fkpage = await axios.get(`https://www.flipkart.com/search?q=${userInput}`);
+    const fkpage = await axios.get(`https://www.flipkart.com/search?q=${userInput}`,headers);
     var $ = cheerio.load(fkpage.data);
     const flipkartItem = $('[data-id*="MOB"]');
     const flipkartTitle = flipkartItem.find("a .row div div").first().text();
@@ -65,7 +71,7 @@ const fetchShelves = async (userInput) => {
 
     //FOR vijaysales
 
-    const vspage = await axios.get(`https://www.vijaysales.com/search/${userInput}`);
+    const vspage = await axios.get(`https://www.vijaysales.com/search/${userInput}`,headers);
     var $ = cheerio.load(vspage.data);
     const vijaysalesItem = $(".Dynamic-Bucket-Main");
     const vijaysalesTitle = vijaysalesItem.find("a").attr("title");
